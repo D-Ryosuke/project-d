@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project.D</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Goldman&family=Libre+Barcode+39&family=Silkscreen&display=swap');
+
+:root{
+  --hback: #347930;
+  --mback: #1c261c;
+  --hfont: #e1e1e1;
+  --mfont: #6e7a6e;
+}
+body{
+  font-family: monospace;
+  background-image: linear-gradient(var(--mback) 90%,var(--mfont)10%);
+
+  background-repeat: repeat;
+  background-size: 100vmax 1vmax;
+}
+.drg {
+  position: absolute;
+  background-color: var(--mback);
+  color: var(--mfont);
+  border: 1.5vw gray groove;
+  text-align: left;
+  width: 80vw;
+  height: fit-content;
+  max-width: 700px;
+  box-shadow: 10px 10px 8px var(--mback);
+  padding-bottom: 20px;
+}
+.drg p{
+  padding: 1px 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+#welcome{
+  left: 1vw;
+
+}
+#info1{
+  left: 23vw;
+  top:17vh;
+}
+#rules1{
+  top:23vh;
+  left: -0.5vw;
+}
+#people{
+  top:39vh;
+  right:3vw;
+  width: 50vw;
+}
+
+.head {
+  text-align: left;
+  font-family: silkscreen;
+  font-size: 5vw;
+  padding: 1vw;
+  cursor: move;
+  z-index: 10;
+  background-color: var(--hback);
+  color: var(--hfont);
+  border-bottom: gray groove 1vw;
+}
+#banner{
+  font-size:14vw;
+  /* width: 14vw; */
+  font-family:goldman;
+  color: antiquewhite;
+  padding: 2vw;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.drg::after{
+  position: absolute;
+  height: 12px;
+  width: fit-content;
+  font-size: 20px;
+  background-color: var(--mback);
+  content: "1f820";
+  font-family: "libre barcode 39";
+  color: var(--mfont);
+  bottom: 0;
+  right: 0;
+}
+@media screen and (min-width: 900px) {
+  .head {
+     font-size: 40px;
+  }
+  .drg{
+     border: 10px gray groove;
+
+  }
+  #banner {
+     font-size: 130px;
+  }
+
+}
+    </style>
+</head>
+<body>
+  <!-- Rules window -->
+    <div id="rules1" class="drg">
+      <div id="rules1head" class="head">Rules (subject to change)</div>
+      <p>Project.D is recruiting. Current Requirements to join:<br>&nbsp;GL >= 5<br>&nbsp;Rep. >= 10</p>
+      <p>Longtime team members will be asked to place the team shorthand in their username:<br>&nbsp;"Nakazato" becomes "D|Nakazato"</p>
+      <p>Activity is a must. Members with no or little activity will be kicked for the opportunity of gaining more active players.</p>
+    </div>
+  <!-- Members Window -->
+    <div id="people" class="drg">
+      <div id="peoplehead" class="head">Top Members</div>
+      <p>Updated DD/MM/YY</p>
+      <dl style="margin-left: 10px;">
+
+          <dt>D|Ryosuke</dt><dd>GL 12, Lvl 59</dd>
+          <dt>Kacaraar21</dt><dd>GL 15, Lvl 84</dd>
+          <dt>Mr.Clean_18</dt><dd>GL 8, Lvl 18</dd>
+          <dt>Driver 2383</dt><dd>GL 8, Lvl 15</dd>
+          <dt>Driver 4683</dt><dd>GL 8, Lvl 19</dd>
+
+
+
+      </dl>
+      </div>
+  <!-- Welcome window with header, main logo, and ID -->
+    <div id="welcome" class="drg" >
+        <div id="welcomehead" class="head">Welcome to Project.D!</div>
+        <div id="banner">Project.D</div>
+        <p style="padding-top: 0;margin-top: 0;margin-bottom: 10px;">Skilled Drivers Only.</p>
+        <p style="position: absolute;bottom: 0px;">#1f820 &lt;&lt;OPEN&gt;&gt;</p>
+      </div>
+  <!-- Bio pic of the club -->
+      <div id="info1" class="drg">
+      <div id="info1head" class="head">What is Project.D?</div>
+      <p>Project.D is an upstart, Initial-D-inspired team intent on bringing glory to its members and gaining recognition for the team.</p>
+      </div>
+
+</body>
+<script>
+// Make the DIV elements draggable:
+for (let i = 0; i < document.getElementsByClassName("drg").length; i++) {
+  array = document.getElementsByClassName("drg")
+  dragElement(document.getElementById(array[i].id));
+  
+}
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "head")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "head").addEventListener("mousedown", dragMouseDown, false);
+    document.getElementById(elmnt.id + "head").addEventListener("touchstart", dragMouseDown, false);
+
+  } 
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX || e.targetTouches[0].pageX;
+    pos4 = e.clientY || e.targetTouches[0].pageY;
+    elmnt.style.zIndex = 10;
+    document.addEventListener("mouseup", closeDragElement, false);
+    document.addEventListener("touchend", closeDragElement, false);
+    
+    // call a function whenever the cursor moves:
+    document.addEventListener("mousemove",elementDrag,{passive:false});
+    document.addEventListener("touchmove",elementDrag,{passive:false});
+  }
+  function elementDrag(e) {
+
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX || pos3 - e.targetTouches[0].pageX;
+    pos2 = pos4 - e.clientY || pos4 - e.targetTouches[0].pageY;
+    pos3 = e.clientX || e.targetTouches[0].pageX;
+    pos4 = e.clientY || e.targetTouches[0].pageY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.removeEventListener("mousemove",elementDrag);
+    document.removeEventListener("touchmove",elementDrag);
+    elmnt.style.zIndex -= 1;
+
+  }
+}
+
+
+</script>
+</html>
